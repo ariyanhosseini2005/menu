@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>منوی سندتن • موبایل</title>
+  <link rel="icon" href="logo.jpg">
+  <style>
+    :root{ --royal:#8E3DBB; --gold:#FFC20E; }
+    html,body{margin:0;padding:0}
+    body{font-family: "Vazirmatn", "Segoe UI", Arial, sans-serif; background:#121212; color:#f5f5f5; line-height:1.65}
+    header,main,footer{max-width: 960px; margin: 0 auto; padding: 12px}
+    header{display:flex; gap:10px; align-items:center; border-bottom:2px solid var(--royal); flex-wrap:wrap}
+    header img{width:52px; height:52px; object-fit:contain; border-radius:10px}
+    .toolbar{display:flex; flex-direction:column; gap:8px; padding:12px; border-bottom:1px solid #333; background:#1c1c1c; border-radius:12px; margin:12px}
+    .toolbar input{padding:12px; border:1px solid #3a3a3a; border-radius:10px; background:#181818; color:#fff; width:100%}
+    .section{padding:0 12px}
+    h2{margin:18px 12px 10px; font-size:18px; font-weight:900; color:var(--gold); border-bottom:1px dashed #333; padding-bottom:6px}
+    .list{display:grid; grid-template-columns:1fr; gap:10px}
+    @media(min-width:640px){ .list{grid-template-columns:1fr 1fr} }
+    .card{background:#1b1b1b; border:1px solid rgba(255,255,255,.06); border-radius:14px; overflow:hidden; display:grid; grid-template-columns:120px 1fr}
+    .pic{width:100%; height:100%; background:#111}
+    .pic img{width:100%; height:100%; object-fit:cover}
+    .info{padding:10px}
+    .title{margin:0; font-size:15px; font-weight:800; color:#fff}
+    footer{border-top:2px solid var(--royal); color:#bbb; font-size:12px; margin-top:16px; text-align:center; padding:12px}
+    a{color:var(--gold)}
+    /* QR */
+    #qrFab{position:fixed; bottom:16px; left:16px; background:var(--royal); color:#fff; border:none; padding:10px 12px; border-radius:999px; box-shadow:0 4px 14px rgba(0,0,0,.4)}
+    #qrModal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6)}
+    #qrCard{width:min(420px,96%); background:#1e1e1e; border:1px solid #333; border-radius:16px; padding:14px; color:#fff}
+    #qrBox{display:flex; align-items:center; justify-content:center; background:#fff; border-radius:12px; padding:10px}
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.jpg" alt="لوگوی سندتن" />
+    <div>
+      <h1 style="margin:0; font-size:20px; font-weight:900">Sandton • منوی سندتن</h1>
+      <div style="font-size:12px; color:#ccc">بهینه‌شده برای موبایل – همهٔ دسته‌ها زیر هم</div>
+    </div>
+  </header>
+
+  <section class="toolbar">
+    <input id="search" type="text" placeholder="🔍 جستجو: نام غذا…" />
+    <div style="font-size:13px; text-align:center">
+      📞 <a href="tel:+989378938200">0937 893 8200</a> • 📷 <a href="https://instagram.com/sandton.garden">sandton.garden</a>
+    </div>
+  </section>
+
+  <main id="menu"></main>
+
+  <footer>
+    ساعات کاری: یکشنبه تا پنجشنبه ۱۸ تا ۲۴ • جمعه ۱۲ تا ۲۴
+  </footer>
+
+  <button id="qrFab">QR</button>
+
+  <div id="qrModal">
+    <div id="qrCard">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px">
+        <strong>کد QR این صفحه</strong>
+        <button id="qrClose" style="background:#2a2a2a; color:#fff; border:1px solid #444; border-radius:8px; padding:6px 10px">✕</button>
+      </div>
+      <div id="qrBox"><div id="qrcode"></div></div>
+      <p style="font-size:12px; color:#ccc; margin-top:8px">این کد را چاپ کنید تا مشتری‌ها با موبایل باز کنند.</p>
+    </div>
+  </div>
+
+  <!-- QRCode.js -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+  <script>
+    // داده‌ها (فقط عنوان و تصویر)
+    const MENU_DATA = [
+      { category: "BARBECUE / باربیکیو", items: [
+        { title: "استیک گوشت" },
+        { title: "استیک مرغ" },
+        { title: "جوجه زعفرانی" },
+        { title: "جوجه تندوری" },
+        { title: "جوجه ترکی" },
+        { title: "کتف و بال تندوری" },
+        { title: "شیشلیک" },
+        { title: "چلو" }
+      ]},
+      { category: "PIZZA / پیتزا", items: [
+        { title: "پیتزا اسپیشیال سندتن" },
+        { title: "پیتزا سیر و استیک" },
+        { title: "پیتزا پپرونی" },
+        { title: "پیتزا مرغ و قارچ" },
+        { title: "پیتزا رست بیف" }
+      ]},
+      { category: "BURGER / برگر", items: [
+        { title: "برگر مخصوص" },
+        { title: "قارچ برگر" },
+        { title: "بیگ برگر" },
+        { title: "چیکن برگر" }
+      ]},
+      { category: "PASTA / پاستا", items: [
+        { title: "پاستا آلفردو" },
+        { title: "چیکن آلفردو" },
+        { title: "بیف استراگانف" }
+      ]},
+      { category: "SALAD / سالاد", items: [
+        { title: "سالاد سزار" },
+        { title: "سالاد یونانی" },
+        { title: "سالاد سبزیجات" }
+      ]},
+      { category: "FRIES / سیب‌زمینی", items: [
+        { title: "سندتن فرایز" },
+        { title: "سیب‌زمینی پنیری" },
+        { title: "سیب‌زمینی ساده" }
+      ]},
+      { category: "SHAKE / شیک و کراش", items: [
+        { title: "اسپیشل کراش اسنیکرز" },
+        { title: "اسپیشل کراش کیت‌کت" },
+        { title: "اسپیشل کراش اورئو" },
+        { title: "اسپیشل کراش توئیکس" }
+      ]},
+      { category: "DRINK / نوشیدنی", items: [
+        { title: "آب پرتقال" },
+        { title: "آب هندوانه" },
+        { title: "آب طالبی" },
+        { title: "مارگاریتا" },
+        { title: "کوکتل لایه" },
+        { title: "لیموناد طبیعی" },
+        { title: "موهیتو" },
+        { title: "شیر موز" },
+        { title: "شیر موز پسته" },
+        { title: "کوکاکولا" },
+        { title: "میراندا" },
+        { title: "فانتا" },
+        { title: "کیکس مکس" },
+        { title: "مالشعیر" },
+        { title: "مالشعیر لیمو" },
+        { title: "آب معدنی کوچیک" },
+        { title: "هایپ" }
+      ]},
+      { category: "COFFEE & TEA / قهوه و چای", items: [
+        { title: "اسپرسو تک" },
+        { title: "اسپرسو دوبل" },
+        { title: "آمریکانو" },
+        { title: "کاپوچینو" },
+        { title: "موکا لاته" },
+        { title: "کافه لاته" },
+        { title: "چای سبز" }
+      ]},
+      { category: "COOKIE / کوکی", items: [
+        { title: "کوکی شکلاتی" },
+        { title: "کوکی نوتلا" },
+        { title: "کوکی ماکادامیا" },
+        { title: "کوکی رد وِلوِت" },
+        { title: "کوکی رز و هل" }
+      ]}
+    ];
+
+    // همهٔ عکس‌ها → logo.jpg
+    MENU_DATA.forEach(c=>c.items.forEach(it=> it.img='logo.jpg'));
+
+    const menu = document.getElementById('menu');
+    const search = document.getElementById('search');
+
+    function render(){
+      const q = (search.value||'').trim().toLowerCase();
+      menu.innerHTML = '';
+      MENU_DATA.forEach(block=>{
+        const h = document.createElement('h2'); h.textContent = block.category; menu.appendChild(h);
+        const list = document.createElement('div'); list.className = 'list';
+        block.items.filter(it=>{
+          if(!q) return true; const t=q.toLowerCase();
+          return (it.title).toLowerCase().includes(t);
+        }).forEach(it=>{
+          const card = document.createElement('article'); card.className='card';
+          const pic = document.createElement('div'); pic.className='pic';
+          const img = document.createElement('img'); img.src = it.img; img.alt=it.title; pic.appendChild(img);
+          const info = document.createElement('div'); info.className='info';
+          const t = document.createElement('h3'); t.className='title'; t.textContent=it.title;
+          info.appendChild(t);
+          card.appendChild(pic); card.appendChild(info);
+          list.appendChild(card);
+        });
+        menu.appendChild(list);
+      });
+    }
+
+    search.addEventListener('input', render);
+    render();
+
+    // QR modal
+    const qrFab = document.getElementById('qrFab');
+    const qrModal = document.getElementById('qrModal');
+    const qrClose = document.getElementById('qrClose');
+    function openQR(){ qrModal.style.display='flex'; const box=document.getElementById('qrcode'); box.innerHTML=''; new QRCode(box, {text: window.location.href, width:256, height:256}); }
+    function closeQR(){ qrModal.style.display='none'; }
+    qrFab.onclick=openQR; qrClose.onclick=closeQR; qrModal.addEventListener('click',(e)=>{ if(e.target===qrModal) closeQR(); });
+  </script>
+</body>
+</html>
