@@ -14,7 +14,6 @@
     header img{width:52px; height:52px; object-fit:contain; border-radius:10px}
     .toolbar{display:flex; flex-direction:column; gap:8px; padding:12px; border-bottom:1px solid #333; background:#1c1c1c; border-radius:12px; margin:12px}
     .toolbar input{padding:12px; border:1px solid #3a3a3a; border-radius:10px; background:#181818; color:#fff; width:100%}
-    .section{padding:0 12px}
     h2{margin:18px 12px 10px; font-size:18px; font-weight:900; color:var(--gold); border-bottom:1px dashed #333; padding-bottom:6px}
     .list{display:grid; grid-template-columns:1fr; gap:10px}
     @media(min-width:640px){ .list{grid-template-columns:1fr 1fr} }
@@ -23,9 +22,9 @@
     .pic img{width:100%; height:100%; object-fit:cover}
     .info{padding:10px}
     .title{margin:0; font-size:15px; font-weight:800; color:#fff}
+    .price{margin-top:6px; font-size:13px; font-weight:900; color:var(--gold)}
     footer{border-top:2px solid var(--royal); color:#bbb; font-size:12px; margin-top:16px; text-align:center; padding:12px}
     a{color:var(--gold)}
-    /* QR */
     #qrFab{position:fixed; bottom:16px; left:16px; background:var(--royal); color:#fff; border:none; padding:10px 12px; border-radius:999px; box-shadow:0 4px 14px rgba(0,0,0,.4)}
     #qrModal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6)}
     #qrCard{width:min(420px,96%); background:#1e1e1e; border:1px solid #333; border-radius:16px; padding:14px; color:#fff}
@@ -63,98 +62,104 @@
         <button id="qrClose" style="background:#2a2a2a; color:#fff; border:1px solid #444; border-radius:8px; padding:6px 10px">✕</button>
       </div>
       <div id="qrBox"><div id="qrcode"></div></div>
-      <p style="font-size:12px; color:#ccc; margin-top:8px">این کد را چاپ کنید تا مشتری‌ها با موبایل باز کنند.</p>
+      <p style="font-size:12px; color:#ccc; margin-top:8px">😍 اسکن کن و منو رو راحت توی گوشیت ببین!</p>
     </div>
   </div>
 
-  <!-- QRCode.js -->
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 
   <script>
-    // داده‌ها (فقط عنوان و تصویر)
     const MENU_DATA = [
       { category: "BARBECUE / باربیکیو", items: [
-        { title: "استیک گوشت" },
-        { title: "استیک مرغ" },
-        { title: "جوجه زعفرانی" },
-        { title: "جوجه تندوری" },
-        { title: "جوجه ترکی" },
-        { title: "کتف و بال تندوری" },
-        { title: "شیشلیک" },
-        { title: "چلو" }
+        { title: "استیک گوشت", price: "657" },
+        { title: "استیک مرغ", price: "548" },
+        { title: "جوجه زعفرانی", price: "410" },
+        { title: "جوجه تندوری", price: "316" },
+        { title: "جوجه ترکی", price: "405" },
+        // { title: "کتف و بال تندوری", price: "" },
+        { title: "شیشلیک", price: "880" },
+        { title: "چلو", price: "206" }
       ]},
       { category: "PIZZA / پیتزا", items: [
-        { title: "پیتزا اسپیشیال سندتن" },
-        { title: "پیتزا سیر و استیک" },
-        { title: "پیتزا پپرونی" },
-        { title: "پیتزا مرغ و قارچ" },
-        { title: "پیتزا رست بیف" }
+        { title: "پیتزا اسپیشیال سندتن", price: "636" },
+        { title: "پیتزا سیر و استیک", price: "647" },
+        { title: "پیتزا پپرونی", price: "437" },
+        { title: "پیتزا مرغ و بوقلمون", price: "517" },
+        { title: "پیتزا رست بیف", price: "605" }
       ]},
       { category: "BURGER / برگر", items: [
-        { title: "برگر مخصوص" },
-        { title: "قارچ برگر" },
-        { title: "بیگ برگر" },
-        { title: "چیکن برگر" }
+        { title: "برگر مخصوص", price: "536" },
+        { title: "قارچ برگر", price: "547" },
+        { title: "بیگ برگر", price: "572" },
+        { title: "چیکن برگر", price: "410" },
+        { title: "هات داگ امریکایی", price: "206" },
+
       ]},
       { category: "PASTA / پاستا", items: [
-        { title: "پاستا آلفردو" },
-        { title: "چیکن آلفردو" },
-        { title: "بیف استراگانف" }
+        { title: "پاستا آلفردو", price: "415" },
+        { title: "چیکن آلفردو", price: "451" },
+        { title: "بیف استراگانف", price: "503" }
       ]},
       { category: "SALAD / سالاد", items: [
-        { title: "سالاد سزار" },
-        { title: "سالاد یونانی" },
-        { title: "سالاد سبزیجات" }
+        { title: "سالاد سزار", price: "394" },
+        { title: "سالاد یونانی", price: "440" },
+        { title: "سالاد سبزیجات", price: "330" }
       ]},
       { category: "FRIES / سیب‌زمینی", items: [
-        { title: "سندتن فرایز" },
-        { title: "سیب‌زمینی پنیری" },
-        { title: "سیب‌زمینی ساده" }
+        { title: "سندتن فرایز", price: "341" },
+        { title: "سیب‌زمینی پنیری", price: "253" },
+        { title: "سیب‌زمینی ساده", price: "153" }
       ]},
       { category: "SHAKE / شیک و کراش", items: [
-        { title: "اسپیشل کراش اسنیکرز" },
-        { title: "اسپیشل کراش کیت‌کت" },
-        { title: "اسپیشل کراش اورئو" },
-        { title: "اسپیشل کراش توئیکس" }
+        { title: "اسپیشل کراش اسنیکرز", price: "242" },
+        { title: "اسپیشل کراش کیت‌کت", price: "231" },
+        { title: "اسپیشل کراش اورئو", price: "220" },
+        { title: "شیک شکلات", price: "198" },
+        { title: "شیک معجون", price: "297" }
+
       ]},
       { category: "DRINK / نوشیدنی", items: [
-        { title: "آب پرتقال" },
-        { title: "آب هندوانه" },
-        { title: "آب طالبی" },
-        { title: "مارگاریتا" },
-        { title: "کوکتل لایه" },
-        { title: "لیموناد طبیعی" },
-        { title: "موهیتو" },
-        { title: "شیر موز" },
-        { title: "شیر موز پسته" },
-        { title: "کوکاکولا" },
-        { title: "میراندا" },
-        { title: "فانتا" },
-        { title: "کیکس مکس" },
-        { title: "مالشعیر" },
-        { title: "مالشعیر لیمو" },
-        { title: "آب معدنی کوچیک" },
-        { title: "هایپ" }
+        { title: "آب پرتقال", price: "280" },
+        { title: "آب هندوانه", price: "206" },
+        { title: "آب طالبی", price: "217" },
+        { title: "مارگاریتا", price: "209" },
+        { title: "کوکتل لایه", price: "" },
+        { title: "لیموناد طبیعی", price: "209" },
+        { title: "موهیتو", price: "209" },
+        { title: "شیر موز", price: "" },
+        { title: "شیر موز پسته", price: "" },
+        { title: "کوکاکولا", price: "45" },
+        { title: "میراندا", price: "45" },
+        { title: "فانتا", price: "45" },
+        { title: "کیکس مکس", price: "70" },
+        { title: "مالشعیر", price: "65" },
+        { title: "مالشعیر لیمو", price: "65" },
+        { title: "آب معدنی کوچیک", price: "10" },
+        { title: "هایپ", price: "65" }
       ]},
       { category: "COFFEE & TEA / قهوه و چای", items: [
-        { title: "اسپرسو تک" },
-        { title: "اسپرسو دوبل" },
-        { title: "آمریکانو" },
-        { title: "کاپوچینو" },
-        { title: "موکا لاته" },
-        { title: "کافه لاته" },
-        { title: "چای سبز" }
+        { title: "اسپرسو تک", price: "55" },
+        { title: "اسپرسو دوبل", price: "77" },
+        { title: "آمریکانو", price: "121" },
+        // { title: "کاپوچینو", price: "" },
+        { title: "موکا لاته", price: "121" },
+        { title: "کافه لاته", price: "121" },
+        { title: "چای سبز", price: "88" },
+        { title: "چای", price: "60" },
+
       ]},
-      { category: "COOKIE / کوکی", items: [
-        { title: "کوکی شکلاتی" },
-        { title: "کوکی نوتلا" },
-        { title: "کوکی ماکادامیا" },
-        { title: "کوکی رد وِلوِت" },
-        { title: "کوکی رز و هل" }
+      { category: "HOOKAH / قیلون", items: [
+        { title: "بلوبری نعنا ", price: "370" },
+        { title: "انبه", price: "370" },
+        { title: "لیمو نعنا", price: "370" },
+        { title: "پرتقال خامه", price: "370" },
+        { title: "بلوبری زیتون", price: "370" },
+        { title: "لاو", price: "370" },
+        { title: "مسکو", price: "370" },
+        { title: "نعنا", price: "370" },
       ]}
     ];
 
-    // همهٔ عکس‌ها → logo.jpg
     MENU_DATA.forEach(c=>c.items.forEach(it=> it.img='logo.jpg'));
 
     const menu = document.getElementById('menu');
@@ -175,7 +180,8 @@
           const img = document.createElement('img'); img.src = it.img; img.alt=it.title; pic.appendChild(img);
           const info = document.createElement('div'); info.className='info';
           const t = document.createElement('h3'); t.className='title'; t.textContent=it.title;
-          info.appendChild(t);
+          const p = document.createElement('div'); p.className='price'; p.textContent= it.price || '—';
+          info.appendChild(t); info.appendChild(p);
           card.appendChild(pic); card.appendChild(info);
           list.appendChild(card);
         });
@@ -186,7 +192,6 @@
     search.addEventListener('input', render);
     render();
 
-    // QR modal
     const qrFab = document.getElementById('qrFab');
     const qrModal = document.getElementById('qrModal');
     const qrClose = document.getElementById('qrClose');
