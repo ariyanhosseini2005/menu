@@ -3,72 +3,201 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>منوی سندتن • موبایل</title>
+  <title>منوی سندتن • نسخه حرفه‌ای (قیمت‌گذاری انعطاف‌پذیر)</title>
   <link rel="icon" href="logo.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{ --royal:#8E3DBB; --gold:#FFC20E; }
-    html,body{margin:0;padding:0}
-    body{font-family: "Vazirmatn", "Segoe UI", Arial, sans-serif; background:#121212; color:#f5f5f5; line-height:1.65}
-    header,main,footer{max-width: 960px; margin: 0 auto; padding: 12px}
-    header{display:flex; gap:10px; align-items:center; border-bottom:2px solid var(--royal); flex-wrap:wrap}
-    header img{width:52px; height:52px; object-fit:contain; border-radius:10px}
-    .toolbar{display:flex; flex-direction:column; gap:8px; padding:12px; border-bottom:1px solid #333; background:#1c1c1c; border-radius:12px; margin:12px}
-    .toolbar input{padding:12px; border:1px solid #3a3a3a; border-radius:10px; background:#181818; color:#fff; width:100%}
-    h2{margin:18px 12px 10px; font-size:18px; font-weight:900; color:var(--gold); border-bottom:1px dashed #333; padding-bottom:6px}
-    .list{display:grid; grid-template-columns:1fr; gap:10px}
-    @media(min-width:640px){ .list{grid-template-columns:1fr 1fr} }
-    .card{background:#1b1b1b; border:1px solid rgba(255,255,255,.06); border-radius:14px; overflow:hidden; display:grid; grid-template-columns:120px 1fr}
-    .pic{width:100%; height:100%; background:#111}
-    .pic img{width:100%; height:100%; object-fit:cover}
-    .info{padding:10px}
-    .title{margin:0; font-size:15px; font-weight:800; color:#fff}
-    .price{margin-top:6px; font-size:13px; font-weight:900; color:var(--gold)}
-    footer{border-top:2px solid var(--royal); color:#bbb; font-size:12px; margin-top:16px; text-align:center; padding:12px}
-    a{color:var(--gold)}
-    #qrFab{position:fixed; bottom:16px; left:16px; background:var(--royal); color:#fff; border:none; padding:10px 12px; border-radius:999px; box-shadow:0 4px 14px rgba(0,0,0,.4)}
-    #qrModal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.6)}
-    #qrCard{width:min(420px,96%); background:#1e1e1e; border:1px solid #333; border-radius:16px; padding:14px; color:#fff}
-    #qrBox{display:flex; align-items:center; justify-content:center; background:#fff; border-radius:12px; padding:10px}
+    :root{ --bg:#0F0F12; --card:#15161A; --muted:#9aa4b2; --text:#EDEFF3; --soft:#1B1D23; --royal:#8E3DBB; --gold:#FFC20E; --accent:#2BD4BD; --danger:#FF5A7C; --ring:0 0 0 2px rgba(142,61,187,.35) }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;height:100%}
+    body{font-family:"Vazirmatn","Segoe UI",Arial,sans-serif;background:radial-gradient(1200px 800px at 80% -10%, rgba(142,61,187,.18), transparent 60%),radial-gradient(900px 700px at -10% 110%, rgba(43,212,189,.12), transparent 55%), var(--bg);color:var(--text);line-height:1.7}
+    a{color:var(--gold);text-decoration:none}
+    button{font-family:inherit}
+    .container{max-width:520px;margin:0 auto;padding:16px}
+    header.app{position:sticky;top:0;z-index:30;background:linear-gradient(180deg, rgba(15,15,18,.85), rgba(15,15,18,.55) 70%, transparent);backdrop-filter: blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .head-wrap{display:flex;gap:12px;align-items:center;padding:12px 16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:52px;height:52px;object-fit:cover;border-radius:14px;border:1px solid rgba(255,255,255,.08);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+    .brand h1{margin:0;font-size:20px;font-weight:900;letter-spacing:.2px}
+    .sub{font-size:12px;color:var(--muted)}
+    .toolbar{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 16px 16px}
+    .search{position:relative}
+    .search input{width:100%;padding:14px 44px 14px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,#121318,#0f1014);color:var(--text);outline:none;box-shadow: inset 0 0 0 1px rgba(255,255,255,.03)}
+    .search input:focus{box-shadow: var(--ring)}
+    .search .ico{position:absolute;right:12px;top:50%;transform:translateY(-50%);opacity:.7}
+    .call-row{display:flex;align-items:center;gap:12px;justify-content:flex-start;flex-wrap:wrap}
+    .tel{direction:ltr; unicode-bidi:bidi-override; font-variant-numeric:tabular-nums; letter-spacing:.4px;}
+    .tel a{color:inherit}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;background:linear-gradient(180deg,#171821,#12131a);border:1px solid rgba(255,255,255,.08);font-size:13px;color:#d7dbe3}
+    .chips{position:sticky;top:92px;z-index:25;background:linear-gradient(180deg, rgba(15,15,18,.85), rgba(15,15,18,.4));backdrop-filter: blur(8px);padding:10px 16px;border-bottom:1px dashed rgba(255,255,255,.06)}
+    .chip-row{display:flex;gap:8px;overflow:auto;padding-bottom:4px}
+    .chip{white-space:nowrap;padding:8px 12px;border-radius:10px;background:#14161b;border:1px solid rgba(255,255,255,.08);font-size:13px;color:#cfd5dd;cursor:pointer;transition:transform .2s ease}
+    .chip.active{background:linear-gradient(180deg, rgba(142,61,187,.2), rgba(142,61,187,.05));border-color:rgba(142,61,187,.45);color:#fff}
+    .chip:hover{transform:translateY(-2px)}
+    main{padding:10px 16px 80px}
+    section.cat{margin-bottom:22px}
+    h2.cat-title{margin:0 0 10px;font-size:18px;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:8px}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:640px){.grid{grid-template-columns:1fr}}
+    @media(min-width:960px){.grid{grid-template-columns:1fr}}
+    .card{position:relative;background:linear-gradient(180deg,#14161b,#101218);border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:120px 1fr}
+    @media(max-width:560px){.card{grid-template-columns:1fr;box-shadow:0 10px 30px rgba(0,0,0,.25)}}
+    .pic{background:radial-gradient(220px 140px at 50% 20%, rgba(142,61,187,.25), transparent 60%), #0d0f14}
+    .pic img{width:100%;height:100%;object-fit:cover;display:block}
+    .info{padding:12px}
+    .title{margin:0 0 6px;font-size:15px;font-weight:800}
+    .price{font-size:13px;font-weight:900;color:var(--gold)}
+    .actions{margin-top:10px;display:flex;gap:8px;align-items:center}
+    .btn{padding:9px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg,#1b1d24,#151720);color:#e9edf3;cursor:pointer}
+    .btn.primary{background:linear-gradient(180deg,#3e2550,#2a1836);border-color:rgba(142,61,187,.6)}
+    .btn:active{transform:translateY(1px)}
+    .qty{display:flex;align-items:center;gap:6px;margin-inline-start:auto}
+    .qty button{width:28px;height:28px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:#12141a;color:#fff}
+    .badge{position:absolute;top:8px;left:8px;padding:4px 8px;border-radius:999px;background:rgba(43,212,189,.15);border:1px solid rgba(43,212,189,.45);font-size:11px;color:#9bf1e2}
+    .fab{position:fixed;bottom:18px;right:18px;z-index:40;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:999px;background:linear-gradient(180deg,#3e2550,#2a1836);color:#fff;border:1px solid rgba(142,61,187,.55);box-shadow:0 10px 30px rgba(0,0,0,.4);cursor:pointer}
+    .fab .count{background:#111;border:1px solid rgba(255,255,255,.18);padding:2px 8px;border-radius:999px;font-size:12px}
+    .drawer{position:fixed;inset:0;display:none}
+    .drawer.active{display:block}
+    .overlay{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+    .panel{position:absolute;top:0;right:0;height:100%;width:min(420px,94%);background:linear-gradient(180deg,#14161b,#0f1117);border-left:1px solid rgba(255,255,255,.06);box-shadow:-8px 0 30px rgba(0,0,0,.45);display:flex;flex-direction:column}
+    .panel header{display:flex;align-items:center;justify-content:space-between;padding:14px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .cart-list{padding:10px 12px;flex:1;overflow:auto}
+    .cart-item{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid rgba(255,255,255,.06);border-radius:14px;background:linear-gradient(180deg,#161820,#12141a);margin-bottom:10px}
+    .cart-item img{width:56px;height:56px;object-fit:cover;border-radius:10px}
+    .cart-title{font-weight:800}
+    .cart-meta{font-size:12px;color:var(--muted)}
+    .cart-qty{display:flex;align-items:center;gap:6px}
+    .cart-qty button{width:28px;height:28px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:#12141a;color:#fff}
+    .remove{border:1px solid rgba(255,255,255,.1);background:#181a22;border-radius:8px;padding:6px 10px;color:#f7b3c0}
+    .cart-foot{border-top:1px solid rgba(255,255,255,.08);padding:12px 14px;background:linear-gradient(180deg,#12141a,#0e1015)}
+    .sum-row{display:flex;justify-content:space-between;font-weight:800}
+    .checkout{margin-top:10px;display:flex;gap:8px}
+    .btn.full{flex:1;text-align:center}
+    .muted{font-size:12px;color:var(--muted)}
+    footer{border-top:1px solid rgba(255,255,255,.06);color:#bdc6d4;font-size:12px;text-align:center;padding:14px}
+    #qrModal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:50}
+    #qrCard{width:min(420px,96%);background:#1a1d25;border:1px solid #2e3340;border-radius:16px;padding:14px;color:#fff}
+    #qrBox{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:10px}
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo.jpg" alt="لوگوی سندتن" />
-    <div>
-      <h1 style="margin:0; font-size:20px; font-weight:900">Sandton • منوی سندتن</h1>
-      <div style="font-size:12px; color:#ccc">بهینه‌شده برای موبایل – همهٔ دسته‌ها زیر هم</div>
+  <header class="app">
+    <div class="head-wrap container">
+      <div class="brand">
+        <img src="logo.jpg" alt="لوگوی سندتن" />
+        <div>
+          <h1>Sandton • منوی سندتن</h1>
+          <div class="sub">sandton.garden</div>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar container">
+      <label class="search">
+        <input id="search" type="text" placeholder=" جستجو: نام غذا…" />
+        <span class="ico">🔎</span>
+      </label>
+      <div class="call-row">
+        <span class="pill">📞 <a href="tel:+989378938200"><span class="tel">0937 893 8200</span></a></span>
+        <span class="pill">📷 <a href="https://instagram.com/sandton.garden" target="_blank" rel="noopener">sandton.garden</a></span>
+        <button id="qrFab" class="pill" style="cursor:pointer">QR کد</button>
+      </div>
+    </div>
+    <div class="chips">
+      <div id="chipRow" class="chip-row"></div>
     </div>
   </header>
 
-  <section class="toolbar">
-    <input id="search" type="text" placeholder="🔍 جستجو: نام غذا…" />
-    <div style="font-size:13px; text-align:center">
-      📞 <a href="tel:+989378938200">0937 893 8200</a> • 📷 <a href="https://instagram.com/sandton.garden">sandton.garden</a>
-    </div>
-  </section>
-
-  <main id="menu"></main>
+  <main id="menu" class="container"></main>
 
   <footer>
     ساعات کاری: یکشنبه تا پنجشنبه ۱۸ تا ۲۴ • جمعه ۱۲ تا ۲۴
   </footer>
 
-  <button id="qrFab">QR</button>
+  <button id="cartFab" class="fab" aria-label="سبد خرید">🛒 سبد خرید <span class="count" id="cartCount">0</span></button>
+
+  <div id="cartDrawer" class="drawer" aria-hidden="true">
+    <div class="overlay" id="cartOverlay"></div>
+    <aside class="panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <header>
+        <strong id="cartTitle">🛒 سبد خرید</strong>
+        <button id="cartClose" class="btn">✕ بستن</button>
+      </header>
+      <div id="cartList" class="cart-list"></div>
+      <div class="cart-foot">
+        <div class="sum-row"><span>مجموع</span><span id="sum">۰</span></div>
+        <div class="muted" style="margin-top:6px" id="priceNote">نمایش قیمت طبق تنظیم فعلی</div>
+        <div class="checkout">
+          <button id="btnCopy" class="btn">کپی سفارش</button>
+          <button id="btnCheckout" class="btn primary">ثبت سفارش</button>
+          <a id="btnWA" href="#" target="_blank" class="btn full">ارسال واتس‌اپ</a>
+        </div>
+        <div class="muted" style="margin-top:8px">تنظیم قیمت: <code id="curMode"></code></div>
+      </div>
+    </aside>
+  </div>
+
+  <div id="coModal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:60">
+    <div style="width:min(520px,96%);background:#171a22;border:1px solid #2e3340;border-radius:16px;padding:14px;color:#fff">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong>فرم ثبت سفارش</strong><button id="coClose" class="btn">✕</button></div>
+      <form id="coForm" style="display:grid;gap:10px">
+        <div style="display:grid;gap:6px">
+          <label>نام و نام‌خانوادگی</label>
+          <input id="coName" required placeholder="مثال: علی رضایی" style="padding:12px;border-radius:12px;border:1px solid #333;background:#10131a;color:#fff">
+        </div>
+        <div style="display:grid;gap:6px">
+          <label>شماره تماس</label>
+          <input id="coPhone" required placeholder="09xxxxxxxxx" style="padding:12px;border-radius:12px;border:1px solid #333;background:#10131a;color:#fff" pattern="^0?9\d{9}$" title="شماره موبایل ایرانی">
+        </div>
+        <div style="display:grid;gap:6px">
+          <label>نوع تحویل</label>
+          <select id="coType" style="padding:12px;border-radius:12px;border:1px solid #333;background:#10131a;color:#fff">
+            <option value="dinein">صرف در محل</option>
+            <option value="takeaway">بیرون‌بر</option>
+            <option value="delivery">ارسال (پیک)</option>
+          </select>
+        </div>
+        <div id="coTableWrap" style="display:grid;gap:6px">
+          <label>شماره میز (برای صرف در محل)</label>
+          <input id="coTable" placeholder="مثال: ۱۲" style="padding:12px;border-radius:12px;border:1px solid #333;background:#10131a;color:#fff">
+        </div>
+        <div id="coAddrWrap" style="display:none;gap:6px">
+          <label>آدرس (برای ارسال)</label>
+          <textarea id="coAddr" rows="3" placeholder="آدرس دقیق..." style="padding:12px;border-radius:12px;border:1px solid #333;background:#10131a;color:#fff"></textarea>
+        </div>
+        <div style="display:grid;gap:6px">
+          <label>توضیحات</label>
+          <textarea id="coNote" rows="2" placeholder="مثلاً: بدون سیر، نان اضافه، ..." style="padding:12px;border-radius:12px;border:1px solid #333;background:#10131a;color:#fff"></textarea>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+          <button type="button" id="coSendWA" class="btn">ارسال در واتس‌اپ</button>
+          <button type="button" id="btnPay" class="btn">پرداخت آنلاین (دمو)</button>
+          <button type="submit" class="btn primary">ثبت نهایی</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <div id="qrModal">
     <div id="qrCard">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px">
         <strong>کد QR این صفحه</strong>
-        <button id="qrClose" style="background:#2a2a2a; color:#fff; border:1px solid #444; border-radius:8px; padding:6px 10px">✕</button>
+        <button id="qrClose" class="btn">✕</button>
       </div>
       <div id="qrBox"><div id="qrcode"></div></div>
-      <p style="font-size:12px; color:#ccc; margin-top:8px">😍 اسکن کن و منو رو راحت توی گوشیت ببین!</p>
+      <p class="muted" style="margin-top:8px">😍 اسکن کن و منو رو راحت توی گوشیت ببین!</p>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-
   <script>
+    // ======== CONFIG (قیمت) ========
+    // داده‌های شما بر حسب «هزار تومان» است، مثلاً 657 یعنی 657000 تومان.
+    // PRICE_MODE:
+    //   'toman' => نمایش به تومان کامل (657000 تومان)
+    //   'hezar' => حذف سه صفر و نمایش به «هزار تومان» (657 هزار تومان)
+    const PRICE_MODE = 'mini'; // ← اگر می‌خواهید تومان کامل باشد، بگذارید 'toman'
+
+    // ===== Data =====
     const MENU_DATA = [
       { category: "BARBECUE / باربیکیو", items: [
         { title: "استیک گوشت", price: "657" },
@@ -76,7 +205,6 @@
         { title: "جوجه زعفرانی", price: "410" },
         { title: "جوجه تندوری", price: "316" },
         { title: "جوجه ترکی", price: "405" },
-        // { title: "کتف و بال تندوری", price: "" },
         { title: "شیشلیک", price: "880" },
         { title: "چلو", price: "206" }
       ]},
@@ -93,7 +221,6 @@
         { title: "بیگ برگر", price: "572" },
         { title: "چیکن برگر", price: "410" },
         { title: "هات داگ امریکایی", price: "206" },
-
       ]},
       { category: "PASTA / پاستا", items: [
         { title: "پاستا آلفردو", price: "415" },
@@ -116,7 +243,6 @@
         { title: "اسپیشل کراش اورئو", price: "220" },
         { title: "شیک شکلات", price: "198" },
         { title: "شیک معجون", price: "297" }
-
       ]},
       { category: "DRINK / نوشیدنی", items: [
         { title: "آب پرتقال", price: "280" },
@@ -141,12 +267,10 @@
         { title: "اسپرسو تک", price: "55" },
         { title: "اسپرسو دوبل", price: "77" },
         { title: "آمریکانو", price: "121" },
-        // { title: "کاپوچینو", price: "" },
         { title: "موکا لاته", price: "121" },
         { title: "کافه لاته", price: "121" },
         { title: "چای سبز", price: "88" },
         { title: "چای", price: "60" },
-
       ]},
       { category: "HOOKAH / قیلون", items: [
         { title: "بلوبری نعنا ", price: "370" },
@@ -160,44 +284,305 @@
       ]}
     ];
 
-    MENU_DATA.forEach(c=>c.items.forEach(it=> it.img='logo.jpg'));
+    const IMG_MAP = {
+      'استیک گوشت': 'https://source.unsplash.com/800x600/?steak',
+      'استیک مرغ': 'https://source.unsplash.com/800x600/?chicken-steak',
+      'جوجه زعفرانی': 'https://source.unsplash.com/800x600/?iranian-kebab',
+      'جوجه تندوری': 'https://source.unsplash.com/800x600/?tandoori-chicken',
+      'جوجه ترکی': 'https://source.unsplash.com/800x600/?chicken-shish',
+      'شیشلیک': 'https://source.unsplash.com/800x600/?shishlik',
+      'چلو': 'https://source.unsplash.com/800x600/?rice',
+      'پیتزا اسپیشیال سندتن': 'https://source.unsplash.com/800x600/?gourmet-pizza',
+      'پیتزا سیر و استیک': 'https://source.unsplash.com/800x600/?garlic-steak-pizza',
+      'پیتزا پپرونی': 'https://source.unsplash.com/800x600/?pepperoni-pizza',
+      'پیتزا مرغ و بوقلمون': 'https://source.unsplash.com/800x600/?chicken-pizza',
+      'پیتزا رست بیف': 'https://source.unsplash.com/800x600/?roast-beef-pizza',
+      'برگر مخصوص': 'https://source.unsplash.com/800x600/?gourmet-burger',
+      'قارچ برگر': 'https://source.unsplash.com/800x600/?mushroom-burger',
+      'بیگ برگر': 'https://source.unsplash.com/800x600/?double-burger',
+      'چیکن برگر': 'https://source.unsplash.com/800x600/?chicken-burger',
+      'هات داگ امریکایی': 'https://source.unsplash.com/800x600/?hotdog',
+      'پاستا آلفردو': 'https://source.unsplash.com/800x600/?fettuccine-alfredo',
+      'چیکن آلفردو': 'https://source.unsplash.com/800x600/?chicken-alfredo',
+      'بیف استراگانف': 'https://source.unsplash.com/800x600/?beef-stroganoff',
+      'سالاد سزار': 'https://source.unsplash.com/800x600/?caesar-salad',
+      'سالاد یونانی': 'https://source.unsplash.com/800x600/?greek-salad',
+      'سالاد سبزیجات': 'https://source.unsplash.com/800x600/?vegetable-salad',
+      'سندتن فرایز': 'https://source.unsplash.com/800x600/?loaded-fries',
+      'سیب‌زمینی پنیری': 'https://source.unsplash.com/800x600/?cheese-fries',
+      'سیب‌زمینی ساده': 'https://source.unsplash.com/800x600/?french-fries',
+      'اسپیشل کراش اسنیکرز': 'https://source.unsplash.com/800x600/?snickers-milkshake',
+      'اسپیشل کراش کیت‌کت': 'https://source.unsplash.com/800x600/?kitkat-milkshake',
+      'اسپیشل کراش اورئو': 'https://source.unsplash.com/800x600/?oreo-shake',
+      'شیک شکلات': 'https://source.unsplash.com/800x600/?chocolate-shake',
+      'شیک معجون': 'https://source.unsplash.com/800x600/?milkshake',
+      'آب پرتقال': 'https://source.unsplash.com/800x600/?orange-juice',
+      'آب هندوانه': 'https://source.unsplash.com/800x600/?watermelon-juice',
+      'آب طالبی': 'https://source.unsplash.com/800x600/?melon-juice',
+      'مارگاریتا': 'https://source.unsplash.com/800x600/?margarita',
+      'لیموناد طبیعی': 'https://source.unsplash.com/800x600/?lemonade',
+      'موهیتو': 'https://source.unsplash.com/800x600/?mojito',
+      'کوکاکولا': 'https://source.unsplash.com/800x600/?coca-cola',
+      'میراندا': 'https://source.unsplash.com/800x600/?mirinda',
+      'فانتا': 'https://source.unsplash.com/800x600/?fanta',
+      'کیکس مکس': 'https://source.unsplash.com/800x600/?chips',
+      'مالشعیر': 'https://source.unsplash.com/800x600/?malt-drink',
+      'مالشعیر لیمو': 'https://source.unsplash.com/800x600/?lemon-malt',
+      'آب معدنی کوچیک': 'https://source.unsplash.com/800x600/?bottled-water',
+      'هایپ': 'https://source.unsplash.com/800x600/?energy-drink',
+      'اسپرسو تک': 'https://source.unsplash.com/800x600/?espresso',
+      'اسپرسو دوبل': 'https://source.unsplash.com/800x600/?double-espresso',
+      'آمریکانو': 'https://source.unsplash.com/800x600/?americano-coffee',
+      'موکا لاته': 'https://source.unsplash.com/800x600/?mocha-latte',
+      'کافه لاته': 'https://source.unsplash.com/800x600/?caffe-latte',
+      'چای سبز': 'https://source.unsplash.com/800x600/?green-tea',
+      'چای': 'https://source.unsplash.com/800x600/?black-tea',
+      'بلوبری نعنا ': 'https://source.unsplash.com/800x600/?hookah',
+      'انبه': 'https://source.unsplash.com/800x600/?hookah',
+      'لیمو نعنا': 'https://source.unsplash.com/800x600/?hookah',
+      'پرتقال خامه': 'https://source.unsplash.com/800x600/?hookah',
+      'بلوبری زیتون': 'https://source.unsplash.com/800x600/?hookah',
+      'لاو': 'https://source.unsplash.com/800x600/?hookah',
+      'مسکو': 'https://source.unsplash.com/800x600/?hookah',
+      'نعنا': 'https://source.unsplash.com/800x600/?hookah'
+    };
+    MENU_DATA.forEach(c=>c.items.forEach((it,i)=>{it.id = `${c.category}-${i}`; it.img = IMG_MAP[it.title] || 'logo.jpg'}));
 
+    // ==== User Image Overrides (admin only) ====
+    const IMG_USER = JSON.parse(localStorage.getItem('sandton_img')||'{}');
+    const imgFor = (it)=> IMG_USER[it.title] || it.img;
+    function setImg(title){
+      const cur = IMG_USER[title] || '';
+      const url = prompt(`لینک عکس برای «${title}» (خالی = حذف)`, cur);
+      if(url===null) return;
+      if(url.trim()===''){ delete IMG_USER[title]; }
+      else { IMG_USER[title]=url.trim(); }
+      localStorage.setItem('sandton_img', JSON.stringify(IMG_USER));
+      renderMenu();
+    }
+    const ADMIN = /[?&]admin=1/.test(location.search);(c=>c.items.forEach((it,i)=>{it.id = `${c.category}-${i}`; it.img = IMG_MAP[it.title] || 'logo.jpg'}));
+
+    // ===== Elements =====
     const menu = document.getElementById('menu');
     const search = document.getElementById('search');
-
-    function render(){
-      const q = (search.value||'').trim().toLowerCase();
-      menu.innerHTML = '';
-      MENU_DATA.forEach(block=>{
-        const h = document.createElement('h2'); h.textContent = block.category; menu.appendChild(h);
-        const list = document.createElement('div'); list.className = 'list';
-        block.items.filter(it=>{
-          if(!q) return true; const t=q.toLowerCase();
-          return (it.title).toLowerCase().includes(t);
-        }).forEach(it=>{
-          const card = document.createElement('article'); card.className='card';
-          const pic = document.createElement('div'); pic.className='pic';
-          const img = document.createElement('img'); img.src = it.img; img.alt=it.title; pic.appendChild(img);
-          const info = document.createElement('div'); info.className='info';
-          const t = document.createElement('h3'); t.className='title'; t.textContent=it.title;
-          const p = document.createElement('div'); p.className='price'; p.textContent= it.price || '—';
-          info.appendChild(t); info.appendChild(p);
-          card.appendChild(pic); card.appendChild(info);
-          list.appendChild(card);
-        });
-        menu.appendChild(list);
-      });
-    }
-
-    search.addEventListener('input', render);
-    render();
-
+    const chipRow = document.getElementById('chipRow');
+    const cartFab = document.getElementById('cartFab');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const cartClose = document.getElementById('cartClose');
+    const cartList = document.getElementById('cartList');
+    const cartCount = document.getElementById('cartCount');
+    const sumEl = document.getElementById('sum');
+    const priceNote = document.getElementById('priceNote');
+    const curMode = document.getElementById('curMode');
+    const btnCopy = document.getElementById('btnCopy');
+    const btnWA = document.getElementById('btnWA');
     const qrFab = document.getElementById('qrFab');
     const qrModal = document.getElementById('qrModal');
     const qrClose = document.getElementById('qrClose');
-    function openQR(){ qrModal.style.display='flex'; const box=document.getElementById('qrcode'); box.innerHTML=''; new QRCode(box, {text: window.location.href, width:256, height:256}); }
-    function closeQR(){ qrModal.style.display='none'; }
-    qrFab.onclick=openQR; qrClose.onclick=closeQR; qrModal.addEventListener('click',(e)=>{ if(e.target===qrModal) closeQR(); });
+
+    // ===== State =====
+    const state = { q:'', cat:'همه', cart: JSON.parse(localStorage.getItem('sandton_cart')||'{}') };
+
+    // ===== Helpers =====
+    const nf = new Intl.NumberFormat('fa-IR');
+    const toTomans = thousands => +thousands * 1000; // کمک برای حالت‌های قدیمی
+
+    // تبدیل واحد نمایش برای هر قیمت آیتم بر اساس MODE
+    function itemTomans(v){
+      if(!v) return 0;
+      if(PRICE_MODE==='mini') return +v;          // قیمت دیتاست را «تومان» در نظر بگیر
+      if(PRICE_MODE==='toman') return toTomans(v);// تومان کامل = هزار * 1000
+      // hezar
+      return toTomans(v);                         // برای نمایش به هزار تومان جدا هندل می‌کنیم
+    }
+    function moneyItem(v){
+      if(!v) return '—';
+      if(PRICE_MODE==='hezar') return nf.format(+v) + ' هزار تومان';
+      return nf.format(itemTomans(v)) + ' تومان'; // mini و toman
+    }
+    function sumDisplayUnits(){ // عدد خام به واحدِ نمایش
+      return Object.entries(state.cart).reduce((acc,[id,qty])=>{
+        const it = findById(id); if(!it || !it.price) return acc;
+        if(PRICE_MODE==='hezar') return acc + (+it.price * qty);     // هزار تومان
+        if(PRICE_MODE==='mini')  return acc + (+it.price * qty);     // تومانِ کوچک
+        return acc + (toTomans(it.price) * qty);                     // تومان کامل
+      },0);
+    }
+    function moneySum(){
+      if(PRICE_MODE==='hezar') return nf.format(sumDisplayUnits()) + ' هزار تومان';
+      return nf.format(sumDisplayUnits()) + ' تومان'; // mini & toman
+    }
+    function sumThousands(){ // برای payload بک‌اند
+      if(PRICE_MODE==='hezar') return sumDisplayUnits();
+      if(PRICE_MODE==='mini') return Math.round(sumDisplayUnits()/1000);
+      return Math.round(sumDisplayUnits()/1000);
+    }
+    function sumTomans(){ // برای payload بک‌اند
+      if(PRICE_MODE==='hezar') return sumDisplayUnits()*1000;
+      return sumDisplayUnits();
+    }
+    const findById = (id)=>{ for(const c of MENU_DATA){ const f = c.items.find(i=>i.id===id); if(f) return f; } };
+
+    // ===== Chips =====
+    function renderChips(){
+      chipRow.innerHTML='';
+      const all = ['همه', ...MENU_DATA.map(c=>c.category)];
+      all.forEach(cat=>{
+        const b = document.createElement('button'); b.className='chip'+(state.cat===cat?' active':''); b.textContent=cat; b.onclick=()=>{state.cat=cat; renderMenu(); scrollToSection(cat)}; chipRow.appendChild(b);
+      });
+    }
+    function scrollToSection(cat){ if(cat==='همه') return; const esc=(window.CSS&&CSS.escape)?CSS.escape(cat):String(cat).replace(/["\\]/g,''); const el=document.querySelector(`[data-cat="${esc}"]`); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+
+    // ===== Menu =====
+    function renderMenu(){
+      const q=(state.q||'').trim().toLowerCase();
+      menu.innerHTML='';
+      MENU_DATA.forEach(block=>{
+        if(state.cat!=='همه' && state.cat!==block.category) return;
+        const sec=document.createElement('section'); sec.className='cat'; sec.dataset.cat=block.category;
+        const h=document.createElement('h2'); h.className='cat-title'; h.innerHTML=`<span>🍽️</span>${block.category}`; sec.appendChild(h);
+        const list=document.createElement('div'); list.className='grid';
+        block.items.filter(it=> !q || it.title.toLowerCase().includes(q)).forEach(it=>{
+          const card=document.createElement('article'); card.className='card';
+          const pic=document.createElement('div'); pic.className='pic';
+          const img=document.createElement('img');
+          img.loading='lazy';
+          img.src=imgFor(it);
+          img.alt=it.title;
+          img.onerror=()=>{ img.onerror=null; img.src = it.img || 'logo.jpg'; };
+          pic.appendChild(img);
+          if(ADMIN){ const eb=document.createElement('button'); eb.className='btn'; eb.style.position='absolute'; eb.style.left='8px'; eb.style.bottom='8px'; eb.textContent='ویرایش عکس'; eb.onclick=(e)=>{ e.stopPropagation(); setImg(it.title); }; card.appendChild(eb);}
+          const info=document.createElement('div'); info.className='info';
+          const t=document.createElement('h3'); t.className='title'; t.textContent=it.title;
+          const p=document.createElement('div'); p.className='price'; p.textContent = it.price ? moneyItem(it.price) : '—';
+          const actions=document.createElement('div'); actions.className='actions';
+          const add=document.createElement('button'); add.className='btn primary'; add.textContent='➕ افزودن'; add.onclick=()=>addToCart(it.id);
+          const qty=document.createElement('div'); qty.className='qty';
+          const minus=document.createElement('button'); minus.textContent='−';
+          const qv=document.createElement('span'); qv.textContent=state.cart[it.id]||0;
+          const plus=document.createElement('button'); plus.textContent='+';
+          minus.onclick=()=>changeQty(it.id,-1,qv); plus.onclick=()=>changeQty(it.id,1,qv);
+          qty.append(minus,qv,plus);
+          actions.append(add,qty); info.append(t,p,actions); card.append(pic,info);
+          if(!it.price){ const b=document.createElement('div'); b.className='badge'; b.textContent='قیمت متغیر'; card.appendChild(b); }
+          list.appendChild(card);
+        });
+        sec.appendChild(list); menu.appendChild(sec);
+      });
+      syncQtyBadges();
+    }
+
+    function syncQtyBadges(){
+      document.querySelectorAll('.card').forEach(card=>{
+        const title=card.querySelector('.title').textContent; let id=null; for(const c of MENU_DATA){ const it=c.items.find(i=>i.title===title); if(it){ id=it.id; break; }}
+        if(!id) return; const span=card.querySelector('.qty span'); if(span) span.textContent=state.cart[id]||0;
+      });
+      updateCartUI();
+    }
+
+    // ===== Cart =====
+    function addToCart(id){ state.cart[id]=(state.cart[id]||0)+1; persist(); updateCartUI(); bumpFab(); }
+    function changeQty(id,delta,localSpan){ const cur=(state.cart[id]||0)+delta; state.cart[id]=Math.max(0,cur); if(state.cart[id]===0) delete state.cart[id]; persist(); if(localSpan) localSpan.textContent=state.cart[id]||0; updateCartUI(); }
+    function removeFromCart(id){ delete state.cart[id]; persist(); updateCartUI(); }
+    function clearCart(){ state.cart={}; persist(); updateCartUI(); }
+    function persist(){ localStorage.setItem('sandton_cart', JSON.stringify(state.cart)); }
+    function bumpFab(){ cartFab.style.transform='scale(1.06)'; setTimeout(()=>{cartFab.style.transform='scale(1)';},160); }
+
+    function orderText(){
+      const entries=Object.entries(state.cart);
+      const lines=entries.map(([id,qty])=>{ const it=findById(id); return `• ${it.title} — ${nf.format(qty)} × ${it.price?moneyItem(it.price):'—'}`; });
+      const head='سفارش جدید از وب‌سایت سندتن';
+      const sumLine='مجموع: '+moneySum();
+      const name=document.getElementById('coName')?.value||''; const phone=document.getElementById('coPhone')?.value||'';
+      const typeSel=document.getElementById('coType'); const typeTxt=typeSel?typeSel.options[typeSel.selectedIndex].text:'';
+      const cust=['نام: '+name,'تلفن: '+phone,'نوع تحویل: '+typeTxt];
+      const tableVal=(document.getElementById('coTable')?.value||'').trim(); if(tableVal) cust.push('میز: '+tableVal);
+      const addrVal=(document.getElementById('coAddr')?.value||'').trim(); if(addrVal) cust.push('آدرس: '+addrVal);
+      const noteVal=(document.getElementById('coNote')?.value||'').trim(); const note = noteVal? ('\nتوضیحات: '+noteVal) : '';
+      return [head,'',...lines,'—',sumLine,'',...cust].join('\n')+note;
+    }
+
+    function updateCartUI(){
+      const totalQty=Object.values(state.cart).reduce((a,b)=>a+b,0); cartCount.textContent=totalQty;
+      cartList.innerHTML=''; const entries=Object.entries(state.cart);
+      if(entries.length===0){ cartList.innerHTML='<div class="muted">سبد خرید خالی است.</div>'; }
+      else{ entries.forEach(([id,qty])=>{ const it=findById(id); if(!it) return; const row=document.createElement('div'); row.className='cart-item'; row.innerHTML=`
+            <img src="${it.img}" alt="${it.title}">
+            <div>
+              <div class="cart-title">${it.title}</div>
+              <div class="cart-meta">${it.price?moneyItem(it.price):'—'} × ${nf.format(qty)}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+              <div class="cart-qty">
+                <button data-act="minus">−</button>
+                <span>${nf.format(qty)}</span>
+                <button data-act="plus">+</button>
+              </div>
+              <button class="remove" data-act="remove">حذف</button>
+            </div>`; row.querySelector('[data-act="minus"]').onclick=()=>changeQty(id,-1); row.querySelector('[data-act="plus"]').onclick=()=>changeQty(id,1); row.querySelector('[data-act="remove"]').onclick=()=>removeFromCart(id); cartList.appendChild(row); }); }
+      sumEl.textContent = moneySum();
+      btnWA.href = `https://wa.me/989378938200?text=${encodeURIComponent(orderText())}`;
+      btnCopy.onclick = async ()=>{ try{ await navigator.clipboard.writeText(orderText()); btnCopy.textContent='کپی شد ✅'; setTimeout(()=>btnCopy.textContent='کپی سفارش',1200);}catch{ alert('کپی ناموفق بود'); } };
+      curMode.textContent = (
+        PRICE_MODE==='toman' ? 'تومان کامل' : PRICE_MODE==='hezar' ? 'هزار تومان (بدون سه صفر)' : 'تومان (بدون سه صفر)'
+      );
+      priceNote.textContent = (
+        PRICE_MODE==='toman' ? 'تمام مبالغ به تومان کامل نمایش داده می‌شود.' : PRICE_MODE==='hezar' ? 'تمام مبالغ به هزار تومان نمایش داده می‌شود.' : 'تمام مبالغ به تومان (بدون سه صفر) نمایش داده می‌شود.'
+      );
+    }
+
+    // ===== Drawer & Checkout =====
+    function openDrawer(){ cartDrawer.classList.add('active'); cartDrawer.setAttribute('aria-hidden','false'); }
+    function closeDrawer(){ cartDrawer.classList.remove('active'); cartDrawer.setAttribute('aria-hidden','true'); }
+    cartFab.onclick=openDrawer; cartOverlay.onclick=closeDrawer; cartClose.onclick=closeDrawer;
+
+    const coModal=document.getElementById('coModal'); const coClose=document.getElementById('coClose'); const coForm=document.getElementById('coForm');
+    function openCO(){ coModal.style.display='flex'; } function closeCO(){ coModal.style.display='none'; }
+    document.getElementById('btnCheckout').onclick=openCO; coClose.onclick=closeCO; coModal.addEventListener('click',e=>{ if(e.target===coModal) closeCO(); });
+    const coType=document.getElementById('coType'); const coTableWrap=document.getElementById('coTableWrap'); const coAddrWrap=document.getElementById('coAddrWrap');
+    coType.addEventListener('change', ()=>{ const v=coType.value; coTableWrap.style.display= v==='dinein'?'grid':'none'; coAddrWrap.style.display= v==='delivery'?'grid':'none'; });
+
+    document.getElementById('coSendWA').onclick=()=>{ if(!coForm.reportValidity()) return; window.open(`https://wa.me/989378938200?text=${encodeURIComponent(orderText())}`,'_blank'); };
+
+    // پرداخت آنلاین (دمو): ساخت payload و نمایش
+    document.getElementById('btnPay').onclick=()=>{
+      if(!coForm.reportValidity()) return;
+      const items = Object.entries(state.cart).map(([id,qty])=>{ const it=findById(id); const p = +(it.price||0); return { id, title: it.title, qty, unit_thousand: (PRICE_MODE==='mini'? Math.round(p/1000) : p), unit_toman: (PRICE_MODE==='mini'? p : toTomans(p)) }; });
+      const payload = {
+        customer: { name: document.getElementById('coName').value, phone: document.getElementById('coPhone').value },
+        deliver: { type: coType.value, table: document.getElementById('coTable').value, address: document.getElementById('coAddr').value },
+        amounts: { thousands: sumThousands(), tomans: sumTomans(), display: moneySum(), mode: PRICE_MODE },
+        items
+      };
+      console.log('PAYMENT_PAYLOAD', payload);
+      alert('دمو پرداخت: اطلاعات سفارش در کنسول مرورگر چاپ شد. برای اتصال درگاه، تنظیمات را به من بده.');
+    };
+
+    coForm.addEventListener('submit', e=>{ e.preventDefault(); if(!coForm.reportValidity()) return; navigator.clipboard.writeText(orderText()).then(()=>{ alert('سفارش ثبت و متن در کلیپ‌بورد کپی شد.'); clearCart(); closeCO(); closeDrawer(); }).catch(()=>{ alert('سفارش ثبت شد. لطفاً متن را دستی کپی/ارسال کنید.'); clearCart(); closeCO(); closeDrawer(); }); });
+
+    search.addEventListener('input', e=>{ state.q=e.target.value; renderMenu(); });
+
+    function openQR(){ qrModal.style.display='flex'; const box=document.getElementById('qrcode'); box.innerHTML=''; new QRCode(box,{text:window.location.href,width:256,height:256}); } function closeQR(){ qrModal.style.display='none'; }
+    qrFab.onclick=openQR; qrClose.onclick=closeQR; qrModal.addEventListener('click',e=>{ if(e.target===qrModal) closeQR(); });
+
+    renderChips(); renderMenu(); updateCartUI();
+
+    // ===== Tests =====
+    (function tests(){
+      try{
+        // قیمت: حالت تومان کامل
+        const bak = PRICE_MODE;
+        const _nf = new Intl.NumberFormat('fa-IR');
+        console.assert(toTomans(2)===2000,'toTomans failed');
+        // جمع خالی
+        const prev=JSON.parse(JSON.stringify(state.cart)); state.cart={}; localStorage.setItem('sandton_cart','{}'); console.assert(sumThousands()===0 && sumTomans()===0,'sum empty failed');
+        // اضافه کردن یک قلم
+        const first=MENU_DATA[0].items[0]; state.cart[first.id]=2; console.assert(sumThousands()=== (+first.price*2), 'sumThousands mismatch');
+        state.cart=prev; localStorage.setItem('sandton_cart', JSON.stringify(prev));
+        console.log('%cAll tests passed','color:#2BD4BD');
+      }catch(e){ console.warn('Tests error',e); }
+    })();
   </script>
 </body>
 </html>
