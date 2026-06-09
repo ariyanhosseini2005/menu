@@ -1,0 +1,21 @@
+{
+  "name": "sandton-garden",
+  "version": "2.0.0",
+  "description": "وب‌سایت رستوران سندتن گاردن — منو، رزرو آلاچیق، سفارش آنلاین و پنل مدیریت",
+  "type": "commonjs",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "seed": "node server/db.js --reseed",
+    "smoke": "node server/smoke-test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "express": "^4.19.2"
+  },
+  "license": "MIT"
+}

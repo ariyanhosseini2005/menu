@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>رزرو آلاچیق و سالن — سندتن گاردن</title>
+  <meta name="description" content="رزرو آنلاین ۱۴ آلاچیق و سالن غذاخوری سندتن گاردن؛ سریع، هوشمند و بدون تماس.">
+  <link rel="icon" href="/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <section class="hero">
+    <span class="kicker">رزرو آنلاین</span>
+    <h1>🛖 رزرو آلاچیق و سالن</h1>
+    <p>تاریخ، ساعت و تعداد نفرات را انتخاب کن، سپس آلاچیق دلخواهت را از روی نقشه رزرو کن.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><b data-count="14">۱۴</b><span>آلاچیق</span></div>
+      <div class="hero-stat"><b>۱</b><span>سالن غذاخوری</span></div>
+      <div class="hero-stat"><b>آنی</b><span>تأیید رزرو</span></div>
+    </div>
+  </section>
+
+  <div class="container" style="padding-bottom:90px">
+    <div class="field"><label>📅 تاریخ رزرو</label><input id="rDate" type="date"></div>
+    <div class="field"><label>⏰ انتخاب ساعت</label><div id="rSlots" class="slot-row"></div></div>
+    <div class="field-row">
+      <div class="field"><label>👥 تعداد نفرات</label><input id="rGuests" type="number" min="1" max="40" value="4"></div>
+      <div class="field"><label>📞 شماره تماس</label><input id="rPhone" inputmode="numeric" placeholder="09xxxxxxxxx"></div>
+    </div>
+    <div class="field"><label>🙍 نام و نام‌خانوادگی</label><input id="rName" placeholder="مثال: علی رضایی"></div>
+    <div class="field"><label>📝 توضیحات (اختیاری)</label><input id="rNote" placeholder="مثلاً: کیک تولد، نزدیک محوطه بازی…"></div>
+
+    <div class="sec-head" style="margin-top:18px"><h2>🗺️ انتخاب آلاچیق / سالن</h2></div>
+    <div class="muted" style="margin-bottom:10px">موارد خاکستری برای تاریخ و ساعت انتخابی قبلاً رزرو شده‌اند.</div>
+    <div id="spotGrid" class="spot-grid"><div class="empty">در حال بارگذاری…</div></div>
+
+    <div class="summary">
+      <div class="line"><span>انتخاب شما</span><b id="rSel">—</b></div>
+      <div class="line"><span>تاریخ و ساعت</span><b id="rWhen">—</b></div>
+      <div class="line"><span>تعداد نفرات</span><b id="rGuestsOut">—</b></div>
+      <button class="btn primary full" id="rConfirm" style="margin-top:8px">✅ تأیید و ثبت رزرو</button>
+    </div>
+
+    <div class="sec-head" style="margin-top:24px"><h2>📋 رزروهای من</h2></div>
+    <div id="myResv"></div>
+  </div>
+
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/reserve.js"></script>
+</body>
+</html>
