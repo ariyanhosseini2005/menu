@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>درباره ما — سندتن گاردن</title>
+  <meta name="description" content="درباره سندتن گاردن، ساعات کاری، اطلاعات تماس و ثبت نظر مهمانان.">
+  <link rel="icon" href="/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <section class="hero">
+    <span class="kicker">درباره ما</span>
+    <h1>✨ سندتن گاردن</h1>
+    <p>تجربه‌ای متفاوت از غذا، نوشیدنی و فضای دنج آلاچیق‌ها در دل طبیعت. کیفیت، آرامش و میزبانی حرفه‌ای.</p>
+    <div class="cta">
+      <a class="btn primary" id="abPhone" href="#">📞 تماس</a>
+      <a class="btn" id="abInsta" href="#" target="_blank" rel="noopener">📷 اینستاگرام</a>
+    </div>
+  </section>
+
+  <div class="container" style="padding-bottom:40px">
+    <section class="block reveal">
+      <div class="sec-head"><h2>چرا سندتن؟</h2></div>
+      <div class="cards3">
+        <div class="fcard"><div class="fi">🛖</div><h3>۱۴ آلاچیق دنج</h3><p>فضای اختصاصی برای جمع‌های خانوادگی و دوستانه.</p></div>
+        <div class="fcard"><div class="fi">🍢</div><h3>منوی باکیفیت</h3><p>از باربیکیو و پیتزا تا قهوه و قلیان.</p></div>
+        <div class="fcard"><div class="fi">🌿</div><h3>فضای سبز و آرام</h3><p>محیطی دلنشین برای گذراندن اوقات خوش.</p></div>
+      </div>
+    </section>
+
+    <div style="display:grid;gap:14px;grid-template-columns:1fr">
+      <div class="about-card reveal"><h3>ساعات کاری</h3><div id="hoursBox"></div></div>
+      <div class="about-card reveal"><h3>اطلاعات تماس</h3><div id="contactBox"></div>
+        <a class="btn" id="mapBtn" style="margin-top:10px" target="_blank" rel="noopener">🗺️ مشاهده روی نقشه</a></div>
+    </div>
+
+    <section class="block reveal">
+      <div class="sec-head"><h2>نظر مهمان‌ها</h2></div>
+      <div class="reviews" id="reviews"></div>
+      <div class="about-card" style="margin-top:14px">
+        <h3>ثبت نظر شما</h3>
+        <div class="field"><label>نام</label><input id="rvName" placeholder="نام شما"></div>
+        <div class="field"><label>امتیاز</label><select id="rvRating"><option value="5">۵ ستاره</option><option value="4">۴ ستاره</option><option value="3">۳ ستاره</option><option value="2">۲ ستاره</option><option value="1">۱ ستاره</option></select></div>
+        <div class="field"><label>متن نظر</label><textarea id="rvText" rows="3" placeholder="تجربه‌ات از سندتن…"></textarea></div>
+        <button class="btn primary full" id="rvSubmit">ثبت نظر</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/about.js"></script>
+</body>
+</html>
