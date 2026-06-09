@@ -78,6 +78,82 @@
     #qrModal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);z-index:50}
     #qrCard{width:min(420px,96%);background:#1a1d25;border:1px solid #2e3340;border-radius:16px;padding:14px;color:#fff}
     #qrBox{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:10px}
+
+    /* ===== Navigation Tabs ===== */
+    .nav-tabs{display:flex;gap:6px;padding:0 16px 10px}
+    .nav-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 6px;border-radius:14px;background:linear-gradient(180deg,#14161b,#101218);border:1px solid rgba(255,255,255,.07);color:#cfd5dd;cursor:pointer;font-size:12px;font-weight:700;transition:all .25s ease}
+    .nav-tab .ic{font-size:20px;line-height:1}
+    .nav-tab.active{background:linear-gradient(180deg, rgba(142,61,187,.28), rgba(142,61,187,.06));border-color:rgba(142,61,187,.55);color:#fff;box-shadow:0 6px 18px rgba(142,61,187,.25)}
+    .nav-tab:active{transform:translateY(1px)}
+    .view{display:none;animation:fadeUp .4s ease}
+    .view.active{display:block}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ===== Hero ===== */
+    .hero{position:relative;margin:6px 16px 14px;padding:20px;border-radius:20px;overflow:hidden;background:linear-gradient(135deg, rgba(142,61,187,.35), rgba(43,212,189,.18)),radial-gradient(600px 200px at 20% 0%, rgba(255,194,14,.18), transparent 60%), #14161b;border:1px solid rgba(255,255,255,.08)}
+    .hero h2{margin:0 0 6px;font-size:22px;font-weight:900}
+    .hero p{margin:0 0 14px;font-size:13px;color:#dfe4ec;line-height:1.7}
+    .hero .cta{display:flex;gap:8px;flex-wrap:wrap}
+    .hero .cta .btn{font-weight:800}
+    .hero-stats{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+    .hero-stat{display:flex;flex-direction:column}
+    .hero-stat b{font-size:18px;font-weight:900;color:var(--gold)}
+    .hero-stat span{font-size:11px;color:var(--muted)}
+
+    /* ===== Reservation ===== */
+    .resv-wrap{padding:0 16px 90px}
+    .field{display:grid;gap:6px;margin-bottom:14px}
+    .field label{font-size:13px;font-weight:700;color:#dfe4ec}
+    .field input,.field select{padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,#121318,#0f1014);color:var(--text);outline:none;font-family:inherit;font-size:14px}
+    .field input:focus,.field select:focus{box-shadow:var(--ring)}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .slot-row{display:flex;gap:8px;overflow:auto;padding-bottom:6px}
+    .slot{white-space:nowrap;padding:9px 14px;border-radius:12px;background:#14161b;border:1px solid rgba(255,255,255,.1);color:#cfd5dd;cursor:pointer;font-size:13px;font-weight:700;transition:all .2s}
+    .slot.active{background:linear-gradient(180deg, rgba(43,212,189,.22), rgba(43,212,189,.05));border-color:rgba(43,212,189,.5);color:#fff}
+    .slot.disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+    .section-h{margin:18px 0 10px;font-size:16px;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:8px}
+    .spot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    @media(min-width:480px){.spot-grid{grid-template-columns:repeat(3,1fr)}}
+    .spot{position:relative;padding:14px 10px;border-radius:16px;background:linear-gradient(180deg,#14161b,#101218);border:1px solid rgba(255,255,255,.08);cursor:pointer;text-align:center;transition:all .22s ease}
+    .spot:hover{transform:translateY(-3px);border-color:rgba(142,61,187,.4)}
+    .spot .emoji{font-size:30px;line-height:1;display:block;margin-bottom:6px}
+    .spot .name{font-weight:800;font-size:14px}
+    .spot .cap{font-size:11px;color:var(--muted);margin-top:3px}
+    .spot.selected{background:linear-gradient(180deg, rgba(142,61,187,.3), rgba(142,61,187,.08));border-color:var(--royal);box-shadow:0 8px 22px rgba(142,61,187,.3)}
+    .spot.selected::after{content:'✓';position:absolute;top:6px;left:8px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;background:var(--royal);border-radius:50%;font-size:13px;font-weight:900;color:#fff}
+    .spot.taken{opacity:.45;cursor:not-allowed;filter:grayscale(.6)}
+    .spot.taken:hover{transform:none}
+    .spot .taken-badge{position:absolute;top:6px;left:6px;right:6px;background:rgba(255,90,124,.2);border:1px solid rgba(255,90,124,.45);border-radius:8px;font-size:10px;color:#ffb3c2;padding:2px}
+    .spot.hall{grid-column:1/-1;display:flex;align-items:center;gap:14px;text-align:right;padding:16px}
+    .spot.hall .emoji{margin:0;font-size:34px}
+    .spot.hall .meta{flex:1}
+    .resv-summary{position:sticky;bottom:0;margin-top:16px;background:linear-gradient(180deg,#12141a,#0e1015);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px}
+    .resv-summary .line{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;color:#dfe4ec}
+    .resv-summary .line b{color:#fff}
+    .btn.big{width:100%;text-align:center;padding:14px;font-size:15px;font-weight:900;margin-top:8px}
+    .myresv{margin-top:18px}
+    .resv-card{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:linear-gradient(180deg,#161820,#12141a);margin-bottom:10px}
+    .resv-card .em{font-size:26px}
+    .resv-card .info2{flex:1}
+    .resv-card .info2 .t{font-weight:800;font-size:14px}
+    .resv-card .info2 .s{font-size:12px;color:var(--muted)}
+    .resv-card .st{font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(43,212,189,.15);border:1px solid rgba(43,212,189,.4);color:#9bf1e2}
+    .empty{text-align:center;color:var(--muted);padding:24px;font-size:13px}
+
+    /* ===== About ===== */
+    .about-wrap{padding:0 16px 90px}
+    .about-card{background:linear-gradient(180deg,#14161b,#101218);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;margin-bottom:14px}
+    .about-card h3{margin:0 0 10px;font-size:16px;font-weight:900;color:var(--gold)}
+    .feat{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+    .feat .fi{font-size:22px;line-height:1.2}
+    .feat .ft b{display:block;font-size:14px;margin-bottom:2px}
+    .feat .ft span{font-size:12px;color:var(--muted)}
+    .info-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:13px}
+    .info-row:last-child{border:0}
+    .info-row .k{color:var(--muted);min-width:90px}
+    .map-btn{display:inline-flex;align-items:center;gap:8px;margin-top:8px}
+    .toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(180deg,#1f2330,#171a22);border:1px solid rgba(43,212,189,.4);color:#fff;padding:12px 18px;border-radius:14px;font-size:13px;font-weight:700;z-index:80;opacity:0;pointer-events:none;transition:all .35s ease;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90%;text-align:center}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   </style>
 </head>
 <body>
@@ -102,16 +178,107 @@
         <button id="qrFab" class="pill" style="cursor:pointer">QR کد</button>
       </div>
     </div>
-    <div class="chips">
+    <div class="nav-tabs container">
+      <button class="nav-tab active" data-view="menuView"><span class="ic">🍽️</span>منو</button>
+      <button class="nav-tab" data-view="resvView"><span class="ic">🛖</span>رزرو آلاچیق</button>
+      <button class="nav-tab" data-view="aboutView"><span class="ic">✨</span>درباره ما</button>
+    </div>
+    <div class="chips" id="chipsBar">
       <div id="chipRow" class="chip-row"></div>
     </div>
   </header>
 
-  <main id="menu" class="container"></main>
+  <!-- ===== MENU VIEW ===== -->
+  <div id="menuView" class="view active">
+    <main id="menu" class="container"></main>
+  </div>
+
+  <!-- ===== RESERVATION VIEW ===== -->
+  <div id="resvView" class="view">
+    <div class="hero">
+      <h2>🛖 رزرو آلاچیق و سالن</h2>
+      <p>تاریخ، ساعت و تعداد نفرات را انتخاب کن، سپس آلاچیق دلخواهت را از روی نقشه رزرو کن. سریع، هوشمند و بدون نیاز به تماس!</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>۱۴</b><span>آلاچیق اختصاصی</span></div>
+        <div class="hero-stat"><b>۱</b><span>سالن غذاخوری</span></div>
+        <div class="hero-stat"><b>آنلاین</b><span>رزرو ۲۴ ساعته</span></div>
+      </div>
+    </div>
+    <div class="resv-wrap">
+      <div class="field">
+        <label>📅 تاریخ رزرو</label>
+        <input id="rDate" type="date">
+      </div>
+      <div class="field">
+        <label>⏰ انتخاب ساعت</label>
+        <div id="rSlots" class="slot-row"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>👥 تعداد نفرات</label><input id="rGuests" type="number" min="1" max="40" value="4"></div>
+        <div class="field"><label>📞 شماره تماس</label><input id="rPhone" type="tel" inputmode="numeric" placeholder="09xxxxxxxxx" pattern="^0?9\d{9}$"></div>
+      </div>
+      <div class="field">
+        <label>🙍 نام و نام‌خانوادگی</label>
+        <input id="rName" placeholder="مثال: علی رضایی">
+      </div>
+
+      <h3 class="section-h"><span>🗺️</span>انتخاب آلاچیق / سالن</h3>
+      <div class="muted" style="margin-bottom:10px">موارد خاکستری برای تاریخ و ساعت انتخابی قبلاً رزرو شده‌اند.</div>
+      <div id="spotGrid" class="spot-grid"></div>
+
+      <div class="resv-summary">
+        <div class="line"><span>انتخاب شما</span><b id="rSel">—</b></div>
+        <div class="line"><span>تاریخ و ساعت</span><b id="rWhen">—</b></div>
+        <div class="line"><span>تعداد نفرات</span><b id="rGuestsOut">—</b></div>
+        <button id="rConfirm" class="btn primary big">✅ تأیید و ثبت رزرو</button>
+      </div>
+
+      <div class="myresv">
+        <h3 class="section-h"><span>📋</span>رزروهای من</h3>
+        <div id="myResvList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ABOUT VIEW ===== -->
+  <div id="aboutView" class="view">
+    <div class="hero">
+      <h2>✨ سندتن گاردن</h2>
+      <p>تجربه‌ای متفاوت از غذا، نوشیدنی و فضای دنج آلاچیق‌ها در دل طبیعت. کیفیت، آرامش و میزبانی حرفه‌ای.</p>
+      <div class="cta">
+        <a class="btn primary" href="tel:+989378938200">📞 تماس</a>
+        <a class="btn" href="https://instagram.com/sandton.garden" target="_blank" rel="noopener">📷 اینستاگرام</a>
+      </div>
+    </div>
+    <div class="about-wrap">
+      <div class="about-card">
+        <h3>چرا سندتن؟</h3>
+        <div class="feat"><div class="fi">🛖</div><div class="ft"><b>۱۴ آلاچیق دنج و خصوصی</b><span>فضایی اختصاصی برای جمع‌های خانوادگی و دوستانه</span></div></div>
+        <div class="feat"><div class="fi">🍢</div><div class="ft"><b>منوی متنوع و باکیفیت</b><span>از باربیکیو و پیتزا تا قهوه و قلیان</span></div></div>
+        <div class="feat"><div class="fi">📱</div><div class="ft"><b>سفارش و رزرو آنلاین</b><span>به‌سادگی از روی گوشی سفارش بده و آلاچیق رزرو کن</span></div></div>
+        <div class="feat"><div class="fi">🌿</div><div class="ft"><b>فضای سبز و آرام</b><span>محیطی دلنشین برای گذراندن اوقات خوش</span></div></div>
+      </div>
+      <div class="about-card">
+        <h3>ساعات کاری</h3>
+        <div class="info-row"><span class="k">یکشنبه تا پنجشنبه</span><span>۱۸:۰۰ تا ۲۴:۰۰</span></div>
+        <div class="info-row"><span class="k">جمعه</span><span>۱۲:۰۰ تا ۲۴:۰۰</span></div>
+        <div class="info-row"><span class="k">شنبه</span><span>۱۸:۰۰ تا ۲۴:۰۰</span></div>
+      </div>
+      <div class="about-card">
+        <h3>اطلاعات تماس</h3>
+        <div class="info-row"><span class="k">تلفن</span><a href="tel:+989378938200"><span class="tel">0937 893 8200</span></a></div>
+        <div class="info-row"><span class="k">اینستاگرام</span><a href="https://instagram.com/sandton.garden" target="_blank" rel="noopener">@sandton.garden</a></div>
+        <div class="info-row"><span class="k">واتساپ</span><a href="https://wa.me/989378938200" target="_blank" rel="noopener">ارسال پیام</a></div>
+        <a class="btn map-btn" href="https://www.google.com/maps/search/sandton+garden" target="_blank" rel="noopener">🗺️ مشاهده روی نقشه</a>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    ساعات کاری: یکشنبه تا پنجشنبه ۱۸ تا ۲۴ • جمعه ۱۲ تا ۲۴
+    ساعات کاری: یکشنبه تا پنجشنبه ۱۸ تا ۲۴ • جمعه ۱۲ تا ۲۴ • © سندتن گاردن
   </footer>
+
+  <div id="toast" class="toast"></div>
 
   <button id="cartFab" class="fab" aria-label="سبد خرید">🛒 سبد خرید <span class="count" id="cartCount">0</span></button>
 
@@ -557,6 +724,154 @@
     qrFab.onclick=openQR; qrClose.onclick=closeQR; qrModal.addEventListener('click',e=>{ if(e.target===qrModal) closeQR(); });
 
     renderChips(); renderMenu(); updateCartUI();
+
+    // ========================= NAV / VIEWS =========================
+    const navTabs = document.querySelectorAll('.nav-tab');
+    const views = document.querySelectorAll('.view');
+    const chipsBar = document.getElementById('chipsBar');
+    function switchView(id){
+      views.forEach(v=>v.classList.toggle('active', v.id===id));
+      navTabs.forEach(t=>t.classList.toggle('active', t.dataset.view===id));
+      chipsBar.style.display = id==='menuView' ? 'block' : 'none';
+      cartFab.style.display = id==='menuView' ? 'flex' : 'none';
+      window.scrollTo({top:0, behavior:'smooth'});
+      if(id==='resvView'){ renderSpots(); renderMine(); }
+      location.hash = id;
+    }
+    navTabs.forEach(t=>t.onclick=()=>switchView(t.dataset.view));
+
+    // ========================= TOAST =========================
+    let toastT;
+    function toast(msg){
+      const el=document.getElementById('toast');
+      el.textContent=msg; el.classList.add('show');
+      clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),2800);
+    }
+
+    // ========================= RESERVATIONS =========================
+    function toFa(n){ return Number(n).toLocaleString('fa-IR'); }
+    const SPOTS = [
+      ...Array.from({length:14}, (_,i)=>({ id:'g'+(i+1), type:'آلاچیق', name:'آلاچیق '+toFa(i+1), cap:'۴ تا ۸ نفر', emoji:'🛖' })),
+      { id:'hall', type:'سالن', name:'سالن غذاخوری', cap:'مناسب جمع‌های بزرگ', emoji:'🏛️', hall:true }
+    ];
+
+    const RESV_KEY='sandton_reservations';
+    const MINE_KEY='sandton_my_resv';
+    const getResv = ()=>JSON.parse(localStorage.getItem(RESV_KEY)||'[]');
+    const setResv = a=>localStorage.setItem(RESV_KEY, JSON.stringify(a));
+    const getMine = ()=>JSON.parse(localStorage.getItem(MINE_KEY)||'[]');
+    const setMine = a=>localStorage.setItem(MINE_KEY, JSON.stringify(a));
+
+    const rState = { date:'', slot:'', spot:'' };
+    const rDate=document.getElementById('rDate');
+    const rSlots=document.getElementById('rSlots');
+    const spotGrid=document.getElementById('spotGrid');
+    const rSel=document.getElementById('rSel');
+    const rWhen=document.getElementById('rWhen');
+    const rGuestsOut=document.getElementById('rGuestsOut');
+    const rGuests=document.getElementById('rGuests');
+
+    (function initDate(){
+      const t=new Date();
+      const s=`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+      rDate.min=s; rDate.value=s; rState.date=s;
+    })();
+
+    function slotsForDate(dateStr){
+      const day=new Date(dateStr+'T00:00:00').getDay(); // 5 = جمعه
+      const start = day===5 ? 12 : 18;
+      const slots=[];
+      for(let h=start; h<=23; h++){ slots.push(String(h).padStart(2,'0')+':00'); }
+      return slots;
+    }
+    function renderSlots(){
+      rSlots.innerHTML='';
+      const slots=slotsForDate(rState.date);
+      if(!slots.includes(rState.slot)) rState.slot = slots[0]||'';
+      slots.forEach(s=>{
+        const b=document.createElement('button'); b.type='button';
+        b.className='slot'+(rState.slot===s?' active':''); b.textContent=s;
+        b.onclick=()=>{ rState.slot=s; rState.spot=''; renderSpots(); };
+        rSlots.appendChild(b);
+      });
+    }
+    const isTaken = id => getResv().some(r=>r.date===rState.date && r.slot===rState.slot && r.spot===id && r.status!=='cancelled');
+    const spotName = id => { const s=SPOTS.find(x=>x.id===id); return s?s.name:'—'; };
+
+    function renderSpots(){
+      renderSlots();
+      spotGrid.innerHTML='';
+      SPOTS.forEach(sp=>{
+        const taken=isTaken(sp.id);
+        const el=document.createElement('button'); el.type='button';
+        el.className='spot'+(sp.hall?' hall':'')+(rState.spot===sp.id?' selected':'')+(taken?' taken':'');
+        if(sp.hall){
+          el.innerHTML=`<span class="emoji">${sp.emoji}</span><div class="meta"><div class="name">${sp.name}</div><div class="cap">${sp.cap}</div></div>`;
+        } else {
+          el.innerHTML=`<span class="emoji">${sp.emoji}</span><div class="name">${sp.name}</div><div class="cap">${sp.cap}</div>`;
+        }
+        if(taken){ const tb=document.createElement('div'); tb.className='taken-badge'; tb.textContent='رزرو شده'; el.appendChild(tb); el.disabled=true; }
+        else { el.onclick=()=>{ rState.spot=sp.id; renderSpots(); }; }
+        spotGrid.appendChild(el);
+      });
+      updateResvSummary();
+    }
+    function updateResvSummary(){
+      rSel.textContent = rState.spot ? spotName(rState.spot) : '—';
+      rWhen.textContent = (rState.date && rState.slot) ? `${rState.date} • ${rState.slot}` : '—';
+      rGuestsOut.textContent = rGuests.value ? toFa(rGuests.value)+' نفر' : '—';
+    }
+    rDate.addEventListener('change', ()=>{ rState.date=rDate.value; rState.spot=''; renderSpots(); });
+    rGuests.addEventListener('input', updateResvSummary);
+
+    function renderMine(){
+      const list=document.getElementById('myResvList');
+      const mine=getMine().filter(r=>r.status!=='cancelled');
+      if(mine.length===0){ list.innerHTML='<div class="empty">هنوز رزروی ثبت نکرده‌اید.</div>'; return; }
+      list.innerHTML='';
+      mine.sort((a,b)=> (a.date+a.slot).localeCompare(b.date+b.slot));
+      mine.forEach(r=>{
+        const sp=SPOTS.find(x=>x.id===r.spot);
+        const card=document.createElement('div'); card.className='resv-card';
+        card.innerHTML=`<div class="em">${sp?sp.emoji:'🛖'}</div>
+          <div class="info2"><div class="t">${spotName(r.spot)}</div><div class="s">${r.date} • ساعت ${r.slot} • ${toFa(r.guests)} نفر</div></div>
+          <button class="remove" data-id="${r.id}">لغو</button>`;
+        card.querySelector('.remove').onclick=()=>cancelResv(r.id);
+        list.appendChild(card);
+      });
+    }
+    function cancelResv(id){
+      if(!confirm('این رزرو لغو شود؟')) return;
+      setResv(getResv().map(r=> r.id===id?{...r,status:'cancelled'}:r));
+      setMine(getMine().map(r=> r.id===id?{...r,status:'cancelled'}:r));
+      renderSpots(); renderMine(); toast('رزرو لغو شد.');
+    }
+    function resvText(r){
+      return ['🛖 رزرو جدید — سندتن گاردن','',
+        'محل: '+spotName(r.spot),'تاریخ: '+r.date,'ساعت: '+r.slot,
+        'تعداد نفرات: '+r.guests,'نام: '+r.name,'تلفن: '+r.phone,'','کد رزرو: '+r.id].join('\n');
+    }
+    document.getElementById('rConfirm').onclick=()=>{
+      const name=document.getElementById('rName').value.trim();
+      const phone=document.getElementById('rPhone').value.trim();
+      const guests=rGuests.value;
+      if(!rState.date){ toast('تاریخ را انتخاب کنید.'); return; }
+      if(!rState.slot){ toast('ساعت را انتخاب کنید.'); return; }
+      if(!rState.spot){ toast('یک آلاچیق یا سالن انتخاب کنید.'); return; }
+      if(!name){ toast('نام را وارد کنید.'); return; }
+      if(!/^0?9\d{9}$/.test(phone)){ toast('شماره موبایل معتبر وارد کنید.'); return; }
+      if(isTaken(rState.spot)){ toast('متأسفانه این محل همین الان رزرو شد.'); renderSpots(); return; }
+      const id='R'+Date.now().toString(36).toUpperCase();
+      const r={ id, date:rState.date, slot:rState.slot, spot:rState.spot, guests, name, phone, status:'active', ts:Date.now() };
+      const all=getResv(); all.push(r); setResv(all);
+      const mine=getMine(); mine.push(r); setMine(mine);
+      window.open(`https://wa.me/989378938200?text=${encodeURIComponent(resvText(r))}`,'_blank');
+      rState.spot=''; renderSpots(); renderMine();
+      toast('✅ رزرو ثبت شد! کد: '+id);
+    };
+
+    renderSpots(); renderMine();
+    if(['#resvView','#aboutView','#menuView'].includes(location.hash)) switchView(location.hash.slice(1));
 
     // ===== Tests =====
     (function tests(){
