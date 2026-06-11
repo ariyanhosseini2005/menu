@@ -461,7 +461,8 @@
       localStorage.setItem('sandton_img', JSON.stringify(IMG_USER));
       renderMenu();
     }
-    const ADMIN = /[?&]admin=1/i.test(location.search) || /admin/i.test(location.hash);
+    const isAdmin = ()=> /[?&]admin=1/i.test(location.search) || /admin/i.test(location.hash);
+    let ADMIN = isAdmin();
 
     // ===== Elements =====
     const menu = document.getElementById('menu');
@@ -758,7 +759,11 @@
     imgbbKeyEl.onchange=(e)=>{ upCfg.imgbbKey=e.target.value.trim(); saveUpCfg(); };
     document.getElementById('adminClose').onclick=closeAdmin;
     document.getElementById('adminOverlay').onclick=closeAdmin;
-    if(ADMIN){ const af=document.getElementById('adminFab'); af.style.display='flex'; af.onclick=openAdmin; }
+    const adminFab = document.getElementById('adminFab');
+    adminFab.onclick=openAdmin;
+    function refreshAdminEntry(){ ADMIN = isAdmin(); adminFab.style.display = ADMIN ? 'flex' : 'none'; renderMenu(); }
+    window.addEventListener('hashchange', refreshAdminEntry);
+    refreshAdminEntry();
 
     renderChips(); renderMenu(); updateCartUI();
 
