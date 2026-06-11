@@ -764,8 +764,8 @@
     function refreshAdminEntry(){ ADMIN = isAdmin(); adminFab.style.display = ADMIN ? 'flex' : 'none'; renderMenu(); }
     window.addEventListener('hashchange', refreshAdminEntry);
     refreshAdminEntry();
-    // ورود مخفی به پنل مدیریت بدون URL: ۵ بار سریع روی لوگو بزن
-    (function(){ let taps=0, timer=null; const lg=document.querySelector('.brand img'); if(!lg) return; lg.style.cursor='pointer'; lg.addEventListener('click', ()=>{ taps++; clearTimeout(timer); timer=setTimeout(()=>{taps=0;},2500); if(taps>=5){ taps=0; ADMIN=true; adminFab.style.display='flex'; renderMenu(); openAdmin(); } }); })();
+    // ورود مخفی به پنل مدیریت بدون URL: ۳ بار روی لوگو/برند بزن
+    (function(){ let taps=0, timer=null; const lg=document.querySelector('.brand'); if(!lg) return; lg.style.cursor='pointer'; lg.addEventListener('click', ()=>{ taps++; clearTimeout(timer); timer=setTimeout(()=>{taps=0;},5000); if(taps>=3){ taps=0; ADMIN=true; adminFab.style.display='flex'; renderMenu(); openAdmin(); } }); })();
 
     renderChips(); renderMenu(); updateCartUI();
 
