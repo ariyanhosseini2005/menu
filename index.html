@@ -461,7 +461,7 @@
       localStorage.setItem('sandton_img', JSON.stringify(IMG_USER));
       renderMenu();
     }
-    const ADMIN = /[?&]admin=1/.test(location.search);(c=>c.items.forEach((it,i)=>{it.id = `${c.category}-${i}`; it.img = IMG_MAP[it.title] || 'logo.jpg'}));
+    const ADMIN = /[?&]admin=1/i.test(location.search) || /admin/i.test(location.hash);
 
     // ===== Elements =====
     const menu = document.getElementById('menu');
